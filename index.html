@@ -143,5 +143,40 @@
         <h3>Our location</h3>
         <p>Southern California</p>
     </section>
+<div id="visitor-counter" style="font-family: Arial, sans-serif; text-align: center; padding: 12px; background: #f0f0f0; color: #333; border-radius: 8px; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+  <div style="font-size: 14px; opacity: 0.8; margin-bottom: 4px;">Visitors Today</div>
+  <div style="font-size: 24px; font-weight: bold;" id="count">0</div>
+</div>
+
+<script>
+(() => {
+  // Load or initialize counter from localStorage
+  let count = parseInt(localStorage.getItem('visitorCount') || '0');
+  
+  // Increment if new session (simple: check if visited today)
+  const today = new Date().toISOString().split('T')[0];
+  const lastVisit = localStorage.getItem('lastVisitDate');
+  if (lastVisit !== today) {
+    count++;
+    localStorage.setItem('visitorCount', count);
+    localStorage.setItem('lastVisitDate', today);
+  }
+  
+  // Display
+  document.getElementById('count').textContent = count.toLocaleString();
+  
+  // Optional: Add a "live" animation (blinking dot)
+  const dot = document.createElement('span');
+  dot.innerHTML = ' ● ';
+  dot.style.color = '#00ff00';
+  dot.style.animation = 'blink 1s infinite';
+  document.getElementById('visitor-counter').appendChild(dot);
+  
+  // Add CSS for blink (inline)
+  const style = document.createElement('style');
+  style.textContent = '@keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }';
+  document.head.appendChild(style);
+})();
+</script>
 </body>
 </html>

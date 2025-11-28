@@ -143,21 +143,5 @@
         <h3>Our location</h3>
         <p>Southern California</p>
     </section>
-<!-- HTML part (place anywhere on your site) -->
-<div id="visitor-counter">
-  Visitors: <span id="count">loading...</span>
-</div>
-
-<script>
-// Free counter using countapi.xyz (no signup needed)
-const namespace = "mywebsite.com";  // change to your domain
-const key = "global-visitors";
-
-fetch(`https://api.countapi.xyz/hit/\( {namespace}/ \){key}`)
-  .then(res => res.json())
-  .then(data => {
-    document.getElementById("count").textContent = data.value.toLocaleString();
-  });
-</script>
 </body>
 </html>
